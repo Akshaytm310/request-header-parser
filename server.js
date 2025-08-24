@@ -1,20 +1,16 @@
 const express = require("express");
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("Request Header Parser Microservice is running!");
-});
-
+const PORT = process.env.PORT || 3000;
 
 app.get("/api/whoami", (req, res) => {
   res.json({
-    ipaddress: req.ip,
-    language: req.headers["accept-language"],
-    software: req.headers["user-agent"]
+    ipaddress: req.ip,                        // client IP
+    language: req.headers["accept-language"], // preferred language
+    software: req.headers["user-agent"]       // system info
   });
 });
 
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
